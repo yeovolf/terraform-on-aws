@@ -15,6 +15,7 @@ phases:
       - terraform init
       
       - terraform validate
+      - terraform destroy -auto-approve
   build:
     commands:
       - ASSUME_ROLE_ARN="arn:aws:iam::124876057204:role/ssm-parameter-store"
