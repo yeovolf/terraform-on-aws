@@ -13,6 +13,7 @@ phases:
       - AWS_SECRET_ACCESS_KEY=E/lc4mpZFLoi7pStg+iWXGdm8g3BiT8EbC36xxI/
       - terraform --version
       - terraform init
+      
       - terraform validate
   build:
     commands:
