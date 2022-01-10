@@ -9,8 +9,8 @@ phases:
        
   pre_build:
     commands:
-      - AWS_ACCESS_KEY_ID=AKIAR2EZRNJ2EDKZKKPZ
-      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_ACCESS_KEY_ID=
+      - AWS_SECRET_ACCESS_KEY=
       - terraform --version
       - terraform init
       - terraform validate
