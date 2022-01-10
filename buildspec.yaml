@@ -17,8 +17,6 @@ phases:
   build:
     commands:
       - ASSUME_ROLE_ARN="arn:aws:iam::124876057204:role/ssm-parameter-store"
-
-
       - terraform apply -auto-approve
   post_build:
     commands:
