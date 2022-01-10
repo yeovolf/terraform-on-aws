@@ -1,0 +1,32 @@
+version: 0.2
+env:
+  parameter-store:
+    AWS_ACCESS_KEY_ID_PARAM: /CodeBuild/AWS_ACCESS_KEY_ID
+    AWS_SECRET_ACCESS_KEY_PARAM: /CodeBuild/AWS_SECRET_ACCESS_KEY
+
+
+phases:
+  install:
+    commands:
+      - "apt-get install unzip -y" # install unzip
+      - "wget https://releases.hashicorp.com/terraform/0.12.18/terraform_0.12.18_linux_amd64.zip"
+      - "unzip terraform_0.12.18_linux_amd64.zip"
+      - "mv terraform /usr/local/bin/"
+       
+  pre_build:
+    commands:
+      - terraform --version
+      - terraform init
+      - terraform validate
+  build:
+    commands:
+      - ASSUME_ROLE_ARN="arn:aws:iam::124876057204:role/ssm-parameter-store"
+      # - AWS_ACCESS_KEY_ID=AKIAR2EZRNJ2PZ5HEG6M
+      # - AWS_SECRET_ACCESS_KEY=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
+      - export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_PARAM
+      - export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_PARAM
+      - terraform apply -auto-approve
+  post_build:
+    commands:
+      - echo terraform apply completed on 'date'
+    
